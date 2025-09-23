@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            padding: 20px;
+            overflow: hidden;
+        }
+        /* Floating background bubbles */
+        
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            animation: float 8s infinite ease-in-out alternate;
+            filter: blur(60px);
+            z-index: 0;
+        }
+        
+        .bubble.one {
+            width: 220px;
+            height: 220px;
+            top: -70px;
+            left: -70px;
+        }
+        
+        .bubble.two {
+            width: 280px;
+            height: 280px;
+            bottom: -100px;
+            right: -100px;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(40px);
+            }
+        }
+        /* Glassmorphism card */
+        
+        .form-container {
+            position: relative;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 25px 20px;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            z-index: 1;
+            animation: popIn 0.8s ease forwards;
+            opacity: 0;
+        }
+        
+        @keyframes popIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        /* Header */
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            font-size: 26px;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            color: #f0f0f0;
+            line-height: 1.4;
+        }
+        /* Inputs */
+        
+        input,
+        textarea {
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.25);
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        input::placeholder,
+        textarea::placeholder {
+            color: #ddd;
+        }
+        
+        input:focus,
+        textarea:focus {
+            background: rgba(255, 255, 255, 0.35);
+            transform: scale(1.03);
+        }
+        
+        textarea {
+            resize: none;
+            height: 90px;
+        }
+        /* Button */
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 12px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.4);
+        }
+        /* Toast notification */
+        
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: linear-gradient(135deg, #00f6ff, #ff00cc);
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            font-weight: 600;
+            font-size: 14px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s ease;
+            z-index: 9999;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        /* Footer */
+        
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #f0f0f0;
+            font-size: 13px;
+        }
+        
+        footer p {
+            margin-bottom: 5px;
+        }
+        
+        footer a {
+            color: #00f6ff;
+            text-decoration: none;
+        }
+        /* Mobile responsiveness */
+        
+        @media (max-width: 700px) {
+            .form-container {
+                padding: 20px 15px;
+            }
+            .header h1 {
+                font-size: 22px;
+            }
+            button {
+                font-size: 14px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background bubbles -->
+    <div class="bubble one"></div>
+    <div class="bubble two"></div>
+
+    <!-- Support Form -->
+    <div class="form-container">
+        <div class="header">
+            <h1>💬 Help & Support</h1>
+            <p>Need assistance? Fill out the form below and our support team will get back to you within 24 hours.</p>
+        </div>
+
+        <form id="emailForm">
+            <input type="text" name="name" placeholder="👤 Your Name" required>
+            <input type="email" name="email" placeholder="📧 Your Email" required>
+            <textarea name="message" placeholder="✍️ Your Message" required></textarea>
+            <button type="submit">📩 Send Message</button>
+        </form>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">✅ Message sent successfully!</div>
+
+    <!-- Footer -->
+    <footer>
+        <p>We usually reply within 24 hours.</p>
+        <p>&copy; 2025 <a href="#">MoneyEarn</a>. All rights reserved.</p>
+    </footer>
+
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("s9YJsMJ1OiQc9O4Sy"); // Replace with your EmailJS Public Key
+        })();
+
+        const toast = document.getElementById("toast");
+
+        function showToast(message, duration = 3000) {
+            toast.textContent = message;
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, duration);
+        }
+
+        document.getElementById("emailForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            emailjs.sendForm("service_0mi0nd1", "template_alvka94", this)
+                .then(function() {
+                    showToast("✅ Message sent successfully!");
+                    document.getElementById("emailForm").reset();
+                }, function(error) {
+                    showToast("❌ Failed to send message!");
+                });
+        });
+    </script>
+</body>
+
+</html>
